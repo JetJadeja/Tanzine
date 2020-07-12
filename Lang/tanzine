@@ -1,0 +1,46 @@
+#!/Library/Frameworks/Python.framework/Versions/3.7/bin/python3
+#export PATH=$PATH":$HOME/bin"
+import os
+from colorama import Fore
+from tokens import Parser
+from shutil import copyfile
+import sys
+
+try:
+    command = sys.argv[1]
+except:
+    print('Help')
+    exit()
+
+if command.endswith('.txt'):
+
+    with open(command) as file:
+        shenzo_parser = Parser(' ')
+        for line in file:
+            
+            shenzo_parser.text = line
+            shenzo_parser.Parse()
+
+elif command == 'startapp':
+    try:
+        app_name = '/' + sys.argv[2]
+
+    except:
+        app_name = '/TanzineApp'
+
+    current_directory = os.getcwd()
+    new_path = os.path.join(current_directory + app_name)
+
+    try:
+        os.mkdir(new_path)
+    except FileExistsError:
+        print(Fore.RED + f'File {new_path} already exists.' + Fore.RESET)
+        exit()
+    with open(new_path + '/' + 'main.txt', 'w+') as file:
+        pass
+
+    os.mkdir(new_path + '/libs')
+    with open(new_path + '/libs.lib.py'):
+        pass
+
+    print('Created app at ' + str(new_path))
