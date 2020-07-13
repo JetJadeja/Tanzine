@@ -6,6 +6,8 @@ from tokens import Parser
 from shutil import copyfile
 import sys
 
+sys.setrecursionlimit(1500)
+
 try:
     command = sys.argv[1]
 except:
@@ -19,7 +21,7 @@ if command.endswith('.txt'):
     with open(command) as file:
         shenzo_parser = Parser(' ')
         for line in file:
-            
+            shenzo_parser.line += 1
             shenzo_parser.text = line
             shenzo_parser.Parse()
 
@@ -35,6 +37,7 @@ elif command == 'startapp':
 
     try:
         os.mkdir(new_path)
+
     except FileExistsError:
         print(Fore.RED + f'File {new_path} already exists.' + Fore.RESET)
         exit()
