@@ -2,7 +2,7 @@
 from colorama import Fore
 
 
-def incorrect_first(text, line):
+def incorrect_first(text):
     print(Fore.RED + '\nERROR: No Definitive Statement')
     print(Fore.BLUE + 'Message: This error may have been caused by using an incorrect first character!')
     print(Fore.YELLOW + str(text))
@@ -24,7 +24,7 @@ def incorrect_value(text, _type, was, obj):
 
 def incorrect_import(text, module):
     print(Fore.RED + f'\nError: Incorrect Value, No MODULE named {module}.')
-    print(Fore.BLUE + 'Message: This error may have been caused by an incorrect module in a @FUNC@ argument')
+    print(Fore.BLUE + 'Message: This error may have been caused by an incorrect module in an @ADD@ argument')
     print(Fore.YELLOW + text)
     print(Fore.GREEN + '^'*len(text))
     

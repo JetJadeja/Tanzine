@@ -315,8 +315,11 @@ class Parser:
                             iterated_over.append(line[index + 1].value)
 
                         if value == '@FUNC@':
-                            func_name = line[index + 1].value
-                            args = line[index + 2].value
+                            try:
+                                func_name = line[index + 1].value
+                                args = line[index + 2].value
+                            except:
+                                errors.syntax_error(self.text)
 
 
 
@@ -347,6 +350,10 @@ class Parser:
                                 elif func[0] == '<':
                                     self.func_line = line
                                     self.running = True
+                                    try:
+                                        self.funcs[func]
+                                    except:
+                                        errors.undefined_function(self.text, func)
                                     if '@RETURN@' not in self.funcs[func]['lines'][-1]:
                                         errors.no_return(self.text, func)
                                     self.run_functions(func, args)
@@ -366,7 +373,9 @@ class Parser:
                                 if type(func) == list:
                                     completed.append('{0}({1})'.format(func[1], ', '.join(args)))
                                     
-                                
+                        if value == '@ADD@':
+                            self.read_ext(line[index + 1].value)
+
                         if value == '@RETURN@':
                             if self.running == True and self.func_line != None:
                                 try:
@@ -446,62 +455,19 @@ class Parser:
 
 
     def read_ext(self, file_name):
+        if file_name[0] == '@':
+            file_name = self.vars[file_name.split('@')[1].rstrip()]
+        else:
+            file_name = file_name.replace('\'','')
         try:
             open(file_name).close()
 
-        except:
+        except Exception:
+            traceback.print_exc()
             errors.incorrect_import(self.text, file_name)
-
         with open(file_name) as imported:
-            in_function = False
+            self.in_func = False
+
             for line in imported:
-
-                for current in line:
-                    if current == '<':
-                        find = self.find_others('>', 'fNAME')
-                        func_name = find.value
-
-                    elif current == '[':
-                        find = self.find_others(']', 'fARGS')
-                        args_list = find.value
-                        current = ''
-                        brack_count = 0
-                        final = []
-
-
-                        for char in find.value:
-                            if char == ',' or char == ']':
-                                if current[0] == '@':
-                                    current = current.split('@')[1]
-                                    self.vars[current] = None
-                                    final.append(f'self.vars["{current}"]')
-
-                                else:
-                                    pass
-
-
-                                current = ''
-
-                            else:
-                                if char != '[':
-                                    current += char
-
-                        find.value == final
-                        try:
-                            self.func_args = final
-                        except Exception as e:
-                            print(e)
-                            errors.syntax_error(self.text)
-
-                    elif current == '{':
-                        find = Token('func', 'fSTART')
-                        self.in_func = True
-                        self.funcs[self.func_name] = {'args': [], 'lines': []}
-
-
-                    elif current == '}':
-                        find = Token('func', 'fEND')
-                        self.in_func = False
-                        self.func_name = ''  
-
-            
+                self.text = line
+                self.Parse()
