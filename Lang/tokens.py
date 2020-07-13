@@ -26,6 +26,8 @@ class Parser:
         self.in_func = False
         self.func_name = ''
         self.func_args = []
+        self.func_line = ''
+        self.line = 0
 
     def advance(self):
         self.position += 1
@@ -43,7 +45,6 @@ class Parser:
         while self.current != None:
             if self.text[0] not in ['@', '\n', '{', '}', '\'', '"', '\t', ' ']:
                 errors.incorrect_first(self.text)
-                exit()
             else:
                 tokens_in_line.append(self.find_characters())
 
@@ -314,6 +315,7 @@ class Parser:
                             args = line[index + 2].value
 
 
+
                         if value == '@RUN@':
                             try:
                                 line[index + 1]
@@ -339,7 +341,12 @@ class Parser:
                                     func = ['', f'self.vars["{func[0]}"].{func[1]}']
                                     
                                 elif func[0] == '<':
+                                    self.func_line = line
+                                    self.running = True
+                                    if '@RETURN@' not in self.funcs[func]['lines'][-1]:
+                                        errors.no_return(self.text, func)
                                     self.run_functions(func, args)
+
 
                                 else:
                                     func = func.split('/')
@@ -356,6 +363,35 @@ class Parser:
                                     completed.append('{0}({1})'.format(func[1], ', '.join(args)))
                                     
                                 
+                        if value == '@RETURN@':
+                            if self.running == True and self.func_line != None:
+                                try:
+                                    self.vars['funcoutput'] = line[index + 1].value
+                                    if self.vars['funcoutput'][0] == '@':
+
+                                        try:
+                                            self.vars['funcoutput'] = self.vars[line[index + 1].value.split('@')[1].rstrip()]
+                                        except:
+                                            errors.unknown_variable(self.text)
+                                except:
+                                    self.vars['funcoutput'] = None
+                                final = []
+                                for token in self.func_line:
+                                    if token.value != '@RUN@':
+                                        final.append(token.value)
+                                    
+                                    else:
+                                        break
+
+                                final.append('@VAR@')
+                                final.append('funcoutput')
+                                self.returned = True
+
+                                self.text = ' '.join(final)
+                                self.Parse()
+                                
+                            
+
 
 
                         if value == '=':
@@ -364,12 +400,18 @@ class Parser:
 
             completed = [str(i) for i in completed]           
             statment  = ' '.join(completed)
+
             try:
                 x = exec(statment)
             except SyntaxError:
-                '''traceback.print_exc()'''
-                errors.syntax_error(self.text)
-            except KeyError:
+                
+                if self.returned:
+                    pass
+                    self.returned = False
+                else:
+                    #traceback.print_exc()
+                    errors.syntax_error(self.text)
+            except KeyError as e:
                 errors.unknown_variable(self.text)
 
         else:
