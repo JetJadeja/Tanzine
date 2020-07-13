@@ -9,7 +9,9 @@ import sys
 try:
     command = sys.argv[1]
 except:
-    print('Help')
+    print('"tanzine filename" to run the tanzine code')
+    print('"tanzine startapp app_name" to create an app directory')
+
     exit()
 
 if command.endswith('.txt'):
@@ -40,7 +42,5 @@ elif command == 'startapp':
         pass
 
     os.mkdir(new_path + '/libs')
-    with open(new_path + '/libs.lib.py'):
-        pass
 
     print('Created app at ' + str(new_path))
