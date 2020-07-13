@@ -1,6 +1,7 @@
 #!/Library/Frameworks/Python.framework/Versions/3.7/bin/python3
 from colorama import Fore
 
+
 def incorrect_first(text):
     print(Fore.RED + '\nERROR: No Definitive Statement')
     print(Fore.BLUE + 'Message: This error may have been caused by using an incorrect first character!')
@@ -72,3 +73,38 @@ def incorrect_filename(text, filename):
     print(Fore.GREEN + '^'*len(text))
 
     print(Fore.RESET)
+
+def undefined_function(text, name):
+    print(Fore.RED + f'\nError: Function {name} referenced before definition!')
+    print(Fore.BLUE + 'Message: This error may have been caused by a wrong function name')
+    print(Fore.YELLOW + text)
+    print(Fore.GREEN + '^'*len(text))
+
+    print(Fore.RESET)
+    exit()
+
+def invalid_function_name(text):
+    print(Fore.RED + '\nError: Invalid Funtion Name')
+    print(Fore.BLUE + 'Message: This error may have been caused by a function name starting with ","')
+    print(Fore.YELLOW + text)
+    print(Fore.GREEN + '^'*len(text))
+
+    print(Fore.RESET)
+    exit()
+
+def invalid_line(text):
+    print(Fore.RED + '\nError: Invalid Line')
+    print(Fore.YELLOW + text)
+    print(Fore.GREEN + '^'*len(text))
+
+    print(Fore.RESET)
+    exit()
+
+def unknown_variable(text):
+    print(Fore.RED + f'\nError: Undefined Variable')
+    print(Fore.BLUE + 'This error may have been caused by a misspelled variable name')
+    print(Fore.YELLOW + text)
+    print(Fore.GREEN + '^'*len(text))
+
+    print(Fore.RESET)
+    exit()

@@ -5,6 +5,7 @@ import traceback
 import ast
 
 
+
 class Token:
     def __init__(self, _type, value):
         self.type = _type
@@ -310,11 +311,20 @@ class Parser:
 
 
                         if value == '@RUN@':
+                            try:
+                                line[index + 1]
+                            except IndexError:
+                                errors.syntax_error(self.text)
+                            
                             if line[index + 1].type == 'RUN':
                                 func = line[index + 1].value['name']
                                 args = line[index + 1].value['args']
 
-                                
+                                try:
+                                    func[0]
+                                except IndexError:
+                                    errors.invalid_function_name(self.text)
+
                                 if func[0] == '@':
                                     func = func.split('.')
                                     if len(func) > 1:
@@ -352,9 +362,11 @@ class Parser:
             statment  = ' '.join(completed)
             try:
                 x = exec(statment)
-            except Exception as e:
+            except SyntaxError:
                 '''traceback.print_exc()'''
                 errors.syntax_error(self.text)
+            except KeyError:
+                errors.unknown_variable(self.text)
 
         else:
             if '@FUNC@' not in self.text:
@@ -367,7 +379,10 @@ class Parser:
                 
 
     def run_functions(self, name, args):
-        function = self.funcs[name]
+        try:
+            function = self.funcs[name]
+        except KeyError:
+            errors.undefined_function(self.text, name)
 
         for arg in args:
             index = args.index(arg)
@@ -385,6 +400,58 @@ class Parser:
             open(file_name).close()
 
         except:
-            pass
+            errors.incorrect_import(self.text, file_name)
+
+        with open(file_name) as imported:
+            in_function = False
+            for line in imported:
+
+                for current in line:
+                    if current == '<':
+                        find = self.find_others('>', 'fNAME')
+                        func_name = find.value
+
+                    elif current == '[':
+                        find = self.find_others(']', 'fARGS')
+                        args_list = find.value
+                        current = ''
+                        brack_count = 0
+                        final = []
+
+
+                        for char in find.value:
+                            if char == ',' or char == ']':
+                                if current[0] == '@':
+                                    current = current.split('@')[1]
+                                    self.vars[current] = None
+                                    final.append(f'self.vars["{current}"]')
+
+                                else:
+                                    pass
+
+
+                                current = ''
+
+                            else:
+                                if char != '[':
+                                    current += char
+
+                        find.value == final
+                        try:
+                            self.func_args = final
+                        except Exception as e:
+                            print(e)
+                            errors.syntax_error(self.text)
+
+                    elif current == '{':
+                        find = Token('func', 'fSTART')
+                        self.in_func = True
+                        self.funcs[self.func_name] = {'args': [], 'lines': []}
+
+
+                    elif current == '}':
+                        find = Token('func', 'fEND')
+                        self.in_func = False
+                        self.func_name = ''  
 
             
