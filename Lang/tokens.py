@@ -230,6 +230,10 @@ class Parser:
 
             elif self.current == ')':
                 par_count += 1
+                try:
+                    current[0]
+                except IndexError:
+                    errors.invalid_function_name(self.text)
                 if current[0] == '@':
                     current = f'self.vars[\'{current[1:]}\']'
                 args.append(current)
