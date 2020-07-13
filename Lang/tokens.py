@@ -103,6 +103,10 @@ class Parser:
             for char in find.value:
 
                 if char == ',' or char == ']':
+                    try:
+                        current[0]
+                    except IndexError:
+                        errors.no_args(self.text, self.func_name)
                     if current[0] == '@':
                         current = current.split('@')[1]
                         self.vars[current] = None

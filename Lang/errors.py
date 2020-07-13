@@ -117,3 +117,12 @@ def no_return(text, func_name):
 
     print(Fore.RESET)
     exit()
+
+def no_args(text, func_name):
+    print(Fore.RED + f'\nError: {func_name} has no arguments')
+    print(Fore.BLUE + 'Message: Please add arguments')
+    print(Fore.YELLOW + text)
+    print(Fore.GREEN + '^'*len(text))
+
+    print(Fore.RESET)
+    exit()
