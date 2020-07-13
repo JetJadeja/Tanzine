@@ -2,7 +2,7 @@
 from colorama import Fore
 
 
-def incorrect_first(text):
+def incorrect_first(text, line):
     print(Fore.RED + '\nERROR: No Definitive Statement')
     print(Fore.BLUE + 'Message: This error may have been caused by using an incorrect first character!')
     print(Fore.YELLOW + str(text))
@@ -103,6 +103,15 @@ def invalid_line(text):
 def unknown_variable(text):
     print(Fore.RED + f'\nError: Undefined Variable')
     print(Fore.BLUE + 'This error may have been caused by a misspelled variable name')
+    print(Fore.YELLOW + text)
+    print(Fore.GREEN + '^'*len(text))
+
+    print(Fore.RESET)
+    exit()
+
+def no_return(text, func_name):
+    print(Fore.RED + f'\nError: {func_name} lacks a @RETURN@ definitive at the end')
+    print(Fore.BLUE + 'Message: Please add a return definitive on the last line')
     print(Fore.YELLOW + text)
     print(Fore.GREEN + '^'*len(text))
 
