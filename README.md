@@ -33,10 +33,8 @@ First, you must start an app using Tanzine start app. `tanzine startapp AppName`
 
 Next, open your IDE of choice and open our *TanzineApp* directory. There should be a file called **main.tzn**. You can open this file and start making some changes!
 
-**More will be added to Quick Start Guide**
-
 ### More Information ℹ️
-The core code behind Tanzine was written in just 3 hours (we've added more features, though). **This means that the core Tanzine code isn't pretty. The development team is working on polishing the codebase, and you can help too by opening a PR or reporting issues!**.
+The core code behind Tanzine was written in just 3 hours (we've added more features, though). **This means that the core Tanzine code isn't pretty, but development team is working on polishing the codebase, and you can help too by opening a PR or reporting issues!**.
 
 ## Please join our Discord server for help or ways to get involved: https://discord.gg/4aWwGQ4
 The server has a Discord bot (called Tater) allowing you to run Tanzine code directly in Discord, and see the output as a response message from the bot. 
