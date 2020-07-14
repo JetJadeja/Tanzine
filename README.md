@@ -1,6 +1,8 @@
 # TanzineLang
 Tanzine is a new, basic programming language written and interpreted in Python. It is able to utilize Python's standard libraries as well a libraries on the [Python Package Index](https://pypi.org/). Using Tanzine, you are able to acheive relatives imports, however package installation is not yet completed. 
 
+## Please join our Discord server for help or ways to get involved: https://discord.gg/4aWwGQ4
+
 ### Warning
 Tanzine is an extremely new language, so there is no installation process. We are currently working on an installer to add the **tanzine** command to your path. 
 The Tanzine Tutorial listed below also does not cover **everything**. The Tanzine core team is working on Docs!
@@ -24,7 +26,7 @@ Full output:
 7
 ```
 
-**More Basics are yet to come**
+**More basics are yet to come!**
 
 ## Quick Start Guide
 First, you must start an app using Tanzine start app. `tanzine startapp AppName`. If you do not specify an app name, Tanzine will create one called *TanzineApp*. We can just use the default app name. Type `tanzine startapp`.
@@ -36,7 +38,10 @@ Next, open your IDE of Choice and open our *TanzineApp* directory. There should 
 ### More Information
 The Code behind Tanzine was made in just 3 hours (we've added more features, though). **This means that the Tanzine code isn't pretty. The Development team is going to work on fixing this**.
 
-The Discord server, which isn't currently available to join has a discord bot allowing you to run Tanzine code directly from Discord. Whenever an error is not covered by Tanzine, the bot **will create an issue in the repository**!
+## Please join our Discord server for help or ways to get involved: https://discord.gg/4aWwGQ4
+The server has a Discord bot (called Tater) allowing you to run Tanzine code directly in Discord, and see the output as a response message from the bot. 
+- Whenever an error is not covered by Tanzine, the bot **will create an issue in the repository**!
+- Mention the bot by typing `@Tater` for instructions!
 
 # Dev Team
 The core dev team currently consists of:
