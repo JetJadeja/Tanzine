@@ -32,3 +32,13 @@ First, you must start an app using Tanzine start app. `tanzine startapp AppName`
 Next, open your IDE of Choice and open our *TanzineApp* directory. There should be a file called **main.tzn**. You  can open this file and start making some changes!
 
 **More will be added to Quick Start Guide**
+
+### More Information
+The Code behind Tanzine was made in just 3 hours (we've added more features, though). **This means that the Tanzine code isn't pretty. The Development team is going to work on fixing this**.
+
+The Discord server, which isn't currently available to join has a discord bot allowing you to run Tanzine code directly from Discord. Whenever an error is not covered by Tanzine, the bot **will create an issue in the repository**!
+
+# Dev Team
+The core dev team currently consists of:
+[JetDeveloping](https://github.com/JetDeveloping)
+[TransmissionsDev](https://github.com/TransmissionsDev)
