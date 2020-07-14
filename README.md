@@ -10,7 +10,9 @@ Tanzine's syntax is simple to understand. Each statement comes after a definitiv
 
 Statements in Tanzine are similar to those in other languages. For example, math is the exact same (besides definitives)! Let's add two numbers! Type: `@MATH@ 5 + 2`. Since we do not display anything, nothing happens. So, let's assign a variable to the output of *5 + 2* and then display it in the console. 
 
-To assign variables, we can use the VAR definitive (`@VAR@`) followed by the variable name. So we could do `@VAR@ num` (however that would display an error). Next we can write an equal symbol and then the statement that we are setting the variable to. So we can type: `@VAR@ num = @MATH@ 5 + 2`. And there you go! We have defined a variable!
+To assign variables, we can use the VAR definitive (`@VAR@`) followed by the variable name. So we could do `@VAR@ num` (however that would display an error). Next we can write an equal symbol and then the statement that we are setting the variable to. 
+
+So we can type: `@VAR@ num = @MATH@ 5 + 2`. And there you go! We have defined a variable!
 
 Now to print this variable we need to use the `print` function. To run functions, we must use the RUN definitive (`@RUN@`) followed by the function and parameters. The syntax for a function is `(function,arg1,arg2,arg3)`. **Note the lack of spaces between the arguments**! To use variables as arguments, we need to use the `@` symbol followed by the variable name. So, our variable `num` would be `@num` in our function. We can type `@RUN@ (/print,@num)` to print *num* out. This will output `7`! Full code: 
 ```
