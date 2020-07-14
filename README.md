@@ -40,5 +40,7 @@ The Discord server, which isn't currently available to join has a discord bot al
 
 # Dev Team
 The core dev team currently consists of:
+
 [JetDeveloping](https://github.com/JetDeveloping)
+
 [TransmissionsDev](https://github.com/TransmissionsDev)
