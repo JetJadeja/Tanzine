@@ -16,7 +16,7 @@ except:
 
     exit()
 
-if command.endswith('.txt'):
+if command.endswith('.tnz'):
 
     with open(command) as file:
         shenzo_parser = Parser(' ')
