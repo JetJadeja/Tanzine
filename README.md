@@ -19,6 +19,10 @@ Now to print this variable we need to use the `print` function. To run functions
 @VAR@ num = @MATH@ 5 + 2
 @RUN@ (/print,@num)
 ```
+Full output:
+```
+7
+```
 
 **More Basics are yet to come**
 
