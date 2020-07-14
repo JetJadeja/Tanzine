@@ -36,7 +36,7 @@ Next, open your IDE of choice and open our *TanzineApp* directory. There should 
 **More will be added to Quick Start Guide**
 
 ### More Information ℹ️
-The core code behind Tanzine was written in just 3 hours (we've added more features, though). **This means that the Tanzine code isn't pretty. The Development team is going to work on fixing this**.
+The core code behind Tanzine was written in just 3 hours (we've added more features, though). **This means that the core Tanzine code isn't pretty. The development team is working on polishing the codebase, and you can help too by opening a PR or reporting issues!**.
 
 ## Please join our Discord server for help or ways to get involved: https://discord.gg/4aWwGQ4
 The server has a Discord bot (called Tater) allowing you to run Tanzine code directly in Discord, and see the output as a response message from the bot. 
