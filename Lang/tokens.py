@@ -266,9 +266,9 @@ class Parser:
         
         
     
-    def Parse(self):
+    def Parse(self, importing=False):
         line = self.create_tokens()
-        if self.in_func == False:
+        if self.in_func == False and importing == False:
             if type(line) == list:
                 iterated_over = []
                 completed = []
@@ -286,7 +286,10 @@ class Parser:
                     if value not in iterated_over:
                         if value == '@MATH@': #Its math with no variables
                             following_values = [line[index + 1].value, line[index + 2].value, line[index + 3].value]
-                            data = eval(f'{str(following_values[0])} {str(following_values[1])} + {str(following_values[2])}')
+                            try:
+                                data = eval(f'{str(following_values[0])} {str(following_values[1])} + {str(following_values[2])}')
+                            except:
+                                errors.syntax_error(self.text)
                             if re.search('[a-zA-Z]', str(data)):
                                 completed.append(f"'{data}'")
 
@@ -427,7 +430,7 @@ class Parser:
             except KeyError as e:
                 errors.unknown_variable(self.text)
 
-        else:
+        elif self.in_func == True:
             if '@FUNC@' not in self.text:
                 self.funcs[self.func_name]['lines'].append(self.text)
                 if self.funcs[self.func_name]['args'] != self.func_args:
@@ -467,7 +470,7 @@ class Parser:
             errors.incorrect_import(self.text, file_name)
         with open(file_name) as imported:
             self.in_func = False
-
-            for line in imported:
-                self.text = line
-                self.Parse()
+            if file_name.endswith('.tnz'):
+                for line in imported:
+                    self.text = line
+                    self.Parse(importing=True)
