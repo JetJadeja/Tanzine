@@ -2,8 +2,8 @@
 Tanzine is a new, basic programming language written and interpreted in Python. It is able to utilize Python's standard libraries as well a libraries on the [Python Package Index](https://pypi.org/). Using Tanzine, you are able to acheive relatives imports, however package installation is not yet completed. 
 
 ### Warning
-Tanzine is an extremely new language, so there is no installation process. We are currently working on an installer to add the **Tanzine** command to your path. 
-The Tanzine Tutorial listed below also does not cover **xeverything**. The Tanzine core team is working on Docs!
+Tanzine is an extremely new language, so there is no installation process. We are currently working on an installer to add the **tanzine** command to your path. 
+The Tanzine Tutorial listed below also does not cover **everything**. The Tanzine core team is working on Docs!
 
 ## Basics
 Tanzine's syntax is simple to understand. Each statement comes after a definitive, which will tell tanzine what type of statement you are making. A definitive looks something like this: `@DEFINITIVE@`.
