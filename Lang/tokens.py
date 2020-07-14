@@ -470,7 +470,7 @@ class Parser:
             errors.incorrect_import(self.text, file_name)
         with open(file_name) as imported:
             self.in_func = False
-            if file_name.endswith('.tnz'):
+            if file_name.endswith('.tzn'):
                 for line in imported:
                     self.text = line
                     self.Parse(importing=True)
