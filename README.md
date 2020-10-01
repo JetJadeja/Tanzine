@@ -28,6 +28,23 @@ Full output:
 
 **More basics are yet to come!**
 
+## Capabilities
+Here is a snippet of code showing Tanzine's capabilities:
+```
+@FUNC@ <fetchJSON> [@url] {
+  @VAR@ request = @RUN@ (requests/get,@url)
+  @VAR@ son = @RUN@ (@request.json)
+  @RUN@ (/print,@son)
+  @RETURN@
+}
+
+@VAR@ response = @RUN@ (<fetchJSON>,"http://crows.sh:9000/cosmosis/getChain")
+
+@RUN@ (/print,@response)
+```
+This code defines a function called **fetchJSON** that takes in a URL. You can use the function to make a GET request to the URL.
+This code will make a request to `http://crows.sh:9000/cosmosis/getChain` and return the JSONified outputed. 
+
 ## Quick Start Guide 📋
 First, you must start an app using Tanzine start app. `tanzine startapp AppName`. If you do not specify an app name, Tanzine will create one called *TanzineApp*. We can just use the default app name. Type `tanzine startapp`.
 
