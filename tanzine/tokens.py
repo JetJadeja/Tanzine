@@ -1,6 +1,6 @@
 #!/Library/Frameworks/Python.framework/Versions/3.7/bin/python3
 import re
-import errors
+import tanzine.errors as errors
 import traceback
 import ast
 
