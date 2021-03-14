@@ -1,39 +1,11 @@
-#!/Library/Frameworks/Python.framework/Versions/3.7/bin/python3
-#export PATH=$PATH":$HOME/bin"
-import os
-from clint.textui import colored
-# from tokens import Parser
-from shutil import copyfile
-import sys
+import os as os
+from clint.textui import colored as TextColor
+from lol.prompt import Prompt
+from tanzine.tokens import Parser
+import sys as sys
 
 sys.setrecursionlimit(1500)
 
-# try:
-#     command = sys.argv[1]
-# except:
-#     print('"tanzine filename" to run the tanzine code')
-#     print('"tanzine startapp app_name" to create an app directory')
-
-#     exit()
-
-# if command.endswith('.tzn'):
-
-#     with open(command) as file:
-#         shenzo_parser = Parser(' ')
-#         for line in file:
-#             shenzo_parser.line += 1
-#             shenzo_parser.text = line
-#             shenzo_parser.Parse()
-
-# elif command == 'startapp':
-#     try:
-#         app_name = '/' + sys.argv[2]
-
-#     except:
-#         app_name = '/TanzineApp'
-
-#     current_directory = os.getcwd()
-#     new_path = os.path.join(current_directory + app_name)
 
 #     try:
 #         os.mkdir(new_path)
@@ -53,4 +25,36 @@ class TanzineArgumentParser(object):
     def __init__(self, arguments):
         self.arguments = arguments
 
-        print(self.arguments)
+        self.parse_arguments()
+
+    def parse_arguments(self):
+        if len(self.arguments) < 1:
+            self.throw_argument_error("Insufficient arguments")
+        else:
+            command = self.arguments[0]
+            if command == "new":
+                try:
+                    project_name = Prompt("Project Name").prompt()
+                    self.create_project(project_name)
+                except:
+                    self.throw_argument_error("Unexpected error")
+            else:
+                if command.endswith(".tzn"):
+                    with open(command, "r") as read_file:
+                        parser = Parser()
+                        for line in read_file.read():
+                            parser.line += 1
+                            parser.text = str(line)
+                            parser.Parse()
+                else:
+                    self.throw_argument_error(f"Invalid arguments : {command}")
+
+
+    def create_project(self, project_name):
+        project_dir = os.path.join(os.getcwd(), project_name)
+        if not os.path.exists(project_dir) and  os.path.isdir(project_dir):
+            print("Ya")
+
+    def throw_argument_error(self, statement):
+        print(TextColor.red(statement))
+        sys.exit()
