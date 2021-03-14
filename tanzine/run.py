@@ -7,20 +7,6 @@ import sys as sys
 sys.setrecursionlimit(1500)
 
 
-#     try:
-#         os.mkdir(new_path)
-
-#     except FileExistsError:
-#         print(Fore.RED + f'File {new_path} already exists.' + Fore.RESET)
-#         exit()
-#     with open(new_path + '/' + 'main.tzn', 'w+') as file:
-#         pass
-
-#     os.mkdir(new_path + '/libs')
-
-#     print('Created app at ' + str(new_path))
-
-
 class TanzineArgumentParser(object):
     def __init__(self, arguments):
         self.arguments = arguments
@@ -36,8 +22,8 @@ class TanzineArgumentParser(object):
                 try:
                     project_name = Prompt("Project Name").prompt()
                     self.create_project(project_name)
-                except:
-                    self.throw_argument_error("Unexpected error")
+                except Exception as exception:
+                    sys.exit()
             else:
                 if command.endswith(".tzn"):
                     with open(command, "r") as read_file:
@@ -52,8 +38,15 @@ class TanzineArgumentParser(object):
 
     def create_project(self, project_name):
         project_dir = os.path.join(os.getcwd(), project_name)
-        if not os.path.exists(project_dir) and  os.path.isdir(project_dir):
-            print("Ya")
+        if not os.path.exists(project_dir):
+            os.mkdir(project_dir)
+            os.mkdir(os.path.join(project_dir, "libs"))
+
+            with open(os.path.join(project_dir, "main.tzn"), "w") as file:
+                file.write("")
+            print(TextColor.green(f"Created project at {project_dir}"))
+        else:
+            self.throw_argument_error(f"A File or Folder with name {project_name} already exists")
 
     def throw_argument_error(self, statement):
         print(TextColor.red(statement))
